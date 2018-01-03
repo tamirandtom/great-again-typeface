@@ -32,6 +32,10 @@ keymap[188] = 'comma';
 keymap[190] = 'dot';
 $(document).ready(function () {
 
+
+        // TODO: Loading screen for letters
+
+        
     var charcount = 0;
     $(document).keyup(function (e) {
         console.log('pressed' + e.which);
