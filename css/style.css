@@ -1,295 +1,109 @@
-/*
-CSS file created with:Instantblueprint - Create a web project framework in seconds.
-http://instantblueprint.com
-Project: Simple
-File: css/style.css
-Last edited: January 16, 2016, 5:52 pm
-*/
-
 /*  Main  */
-* {font-family: 'simpler'; box-sizing:border-box;}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
- background:#FFF;
- color:#000;
- font-family: 'simpler' Arial, Helvetica, sans-serif;
- font-size: 14px;
- line-height:18px;
+    background: #eee;
+    color: #000;
+    font-family: 'simpler' Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 18px;
 }
 
 .wrapper {
- margin:auto auto;
- padding: 0 16px;
- width:100%; 
- max-width:960px; /*  Change to desired width :)  */
+    margin: auto auto;
+    padding: 0 16px;
+    width: 100%;
+    max-width: 960px;
+    /* direction:rtl; */
+    text-align: center;
 }
 
-.background-black {
-background: #000;
-}
-
-
-.divider {
-    height:1px;
-    background:#EF4132;
-    margin-top:32px;
-    margin-bottom:32px;
-}
-/* fonts */
-h1 {
-    font-size: 32px;
-    line-height:32px;
-    color:#488FCC;
-    font-weight:700;
-    margin-bottom:24px;
-}
-h2 {
-    font-size: 20px;
-    line-height:28px;
-    color:#FCD813;
-    font-weight:200;
-}
-
-h3 {
-    font-size: 16px;
-    line-height:24px;
-    color:#000;
-    font-weight:700;
-}
-
-h4 {
-    font-size: 20px;
-    line-height:24px;
-    color:#fff;
-    font-weight:200;
-}
-h5 {
-    font-size: 16px;
-    line-height:24px;
-    color:#fff;
-    font-style: italic;
-    font-weight:400;
-}
-.button {
-    cursor: pointer;
-    font-size: 16px;
-    line-height:24px;
-    color:#EF4132;
-    font-weight:700;
-    padding: 12px 32px;
-    border:2px solid #EF4132;
-    margin-top:32px;
-    display:inline-block;
-    border-radius: 30px;
-    text-decoration:none;
-    text-align:center;
-    transition: all .2s ease-in-out;
-}
-.button.blue {
-    color:#fff;
-    border:2px solid #488FCC;  
-    background:#488FCC;
-}
-
-
-.button:hover {
-    background: #EF4132;
-    color:#fff;
-}
-
-.button.blue:hover {
-    border:2px solid #63B0F2;  
-    background:#63B0F2;
-}
-
-/* sections */
-
-
-.intro {
-    direction:rtl;
-    display:flex;
-    flex-direction: row;
-    height:500px;
-}
-.side-50-left, .side-50-right {
-    width:50%;
-}
-.black-section {
-    background:#000;
-    padding-top:32px;
-    padding-bottom:32px;
-    display:flex;
-    flex-direction: row;
-}
-
-.dir-rtl {
-    direction:rtl; text-align:right;
-}
-.carrousel {
-width:90%;
-max-width:900px;
- margin: auto auto;
-}
-
-/* .slick-track {
-    height: 400px;
-} */
-
-
-
-.carousel-img {
-    height: 62vw;
-    max-height:558px;
-    background-size:cover;
-}
-.quote-unit {
-    margin-bottom:24px;
-    padding-bottom:24px;
-    border-bottom:1px solid #FCD813;
-    margin-left:48px;
-}
-.quote-block {
-    margin-bottom:24px;
-    margin-left:48px;
-    
-}
-.third-section {
-    display:flex;
-    flex-direction: row;
-    height:500px;
-}
-.image-divider {
-    height:200px;
-    background:url("../images/waves.svg");
-    background-size:cover;
-    position: relative;
-    top: 2px;
-}
-.image-divider-2 {
-    height:200px;
-    background:url("../images/waves2.svg");
-    background-size:cover;
-    
-}
-.black-link {
-    margin-top:8px;
-    display:inline-block;
-    font-size:14px;
-    line-height:14px;
-    color:#FCD813;
-    text-decoration:none;
-}
-
-.forth-section {
-    display:flex;
-    flex-direction: row;
-}
-
-.sixth-section {
-    display:flex;
-    flex-direction: row;
- 
-}
-
-.credits-block {
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:center;   
-}
-.credits-text {
-    padding:0 24px;
-    text-align:center;
-}
-
-.credits-end {
-    margin-top:40px;
-    background:#FCD813;
-    font-style:14px;
-    height:40px;
+#frame {
+    height: 500px;
+    max-width: 900px;
+    background: #fff;
     display: flex;
-    align-items:center;
-    justify-content:center
-}
-
-/* images
- */
-
- .main-title {
-     margin-bottom:24px;
-     position: relative;
-     /* right:-16px; */
- }
-
- .image-top {
-     width:80%;
-     max-width:597px;
- }
-/* MISC
- */
- .padding-32 {
-    padding:32px 0;
-}
- .max-width-500 {
-     max-width:500px;
- }
-
- .intro .side-50-left {
-     text-align:left;
- }
-
- .flex-center {
     align-items: center;
     justify-content: center;
-    display:flex;
-}
-.align-center {
-    text-align:center;
-    margin: auto auto;
-}
-
-.image-bottom {max-width:499px;width:70%;}
-
-@media (max-width: 600px) { 
-* {
-    text-align:center;
-}
-    .side-50-left, .side-50-right {
-        width:100%;
-    }
-    
-.black-section, .intro, .third-section, .forth-section {
-    flex-direction:column;
-}
-.sixth-section {
-    flex-direction: column-reverse
-}
-.intro, .third-section {
-    flex-direction: column-reverse;
-    height:auto;
-    text-align:center;
- }
- .intro {
-     margin-bottom: 40px;
- }
- .intro .side-50-left {
-    text-align:center;
-}
- .forth-section {
-     padding:0px 32px;
- }
- .image-top {max-width:140px;}
- .image-bottom {max-width:180px;margin-top:32px;}
-
- .quote-unit {
-    margin-left:0px;
-}
-.quote-block {
-    margin-left:0px;
-    
+    flex-flow: row wrap;
+    align-content: center;
+    transition: all 0.1s ease-out;
+    border-radius:8px;
+    border:2px solid #fff;
 }
 
-h1,h2,h3,h4,h5,h6 {
-    text-align:center;
+#frame.frameError {
+    border-color: #ccc;
 }
- }
 
+.block-word {
+    margin-left: 20px;
+    white-space: pre-line;
+}
+
+.block-letter.size1{ height: 120px; margin:17px 0;}
+.block-letter.size2{ height: 100px; margin:15px 0;}
+.block-letter.size3{ height: 80px; margin:12px 0;}
+.block-letter.size4{ height: 60px; margin:10px 0;}
+.block-letter.size5{ height: 50px; margin:10px 0;}
+.block-letter.size6{ height: 40px;margin:5px 0; }
+
+.block-letter.spacer {
+    width: 20px;
+    opacity: 0;
+}
+
+.cursor {
+    height: 65px;    
+    background: #000;
+    display: inline-block;
+    width: 2px;
+}
+
+.cursor.size1 {height: 140px;}
+.cursor.size2 {height: 120px;}
+.cursor.size3 {height: 110px;}
+.cursor.size4 {height: 80px;}
+.cursor.size5 {height: 50px;}
+.cursor.size6 {height: 50px;}
+
+
+/* cursor animation */
+
+.blinking-cursor {
+    -webkit-animation: 1s blink step-end infinite;
+    -moz-animation: 1s blink step-end infinite;
+    -ms-animation: 1s blink step-end infinite;
+    -o-animation: 1s blink step-end infinite;
+    animation: 1s blink step-end infinite;
+  }
+  @-webkit-keyframes blink {
+    0%   { background: #fff }
+    50%  { background: #FF3D12 }
+    97%  { background: #FF3D12 }
+    100% { background: #fff }
+  }
+  
+  @-moz-keyframes blink {
+    0%   { background: #fff }
+    50%  { background: #FF3D12 }
+    97%  { background: #FF3D12 }
+    100% { background: #fff }
+  }
+  
+  @-ms-keyframes blink {
+    0%   { background: #fff }
+    50%  { background: #FF3D12 }
+    97%  { background: #FF3D12 }
+    100% { background: #fff }
+  }
+  
+  @-o-keyframes blink {
+    0%   { background: #fff }
+    50%  { background: #FF3D12 }
+    97%  { background: #FF3D12 }
+    100% { background: #fff }
+  }
