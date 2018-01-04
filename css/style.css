@@ -3,15 +3,49 @@
 * {
     box-sizing: border-box;
 }
-
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,700');
+html {
+    min-height: 100%;
+    
+}
 body {
-    background: #eee;
+    font-family: 'Montserrat', sans-serif;
+
+    background: #F5F5F5;
     color: #000;
-    font-family: 'simpler' Arial, Helvetica, sans-serif;
     font-size: 14px;
     line-height: 18px;
+    min-height: 100%;
 }
 
+
+.credits {
+    font-size:14px;
+    font-weight:400;
+    text-align:center;
+    color:#212121;
+    height:40px;
+    border-bottom: 8px solid #f00;
+    position:absolute;
+    width:100%;
+    bottom:0px;
+    left:0px;
+}
+.credits b {
+    font-weight: 700;
+    letter-spacing:0.5px;    
+    
+}
+.credits a {
+    font-weight: 500;
+    color:#f00;
+    letter-spacing:0.5px;
+    text-decoration:none;
+}
+
+.credits a:hover {
+    color:#f77;
+}
 .wrapper {
     margin: auto auto;
     padding: 0 16px;

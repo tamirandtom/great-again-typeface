@@ -30,27 +30,81 @@ keymap[49] = 'ex';
 keymap[191] = 'ex';
 keymap[188] = 'comma';
 keymap[190] = 'dot';
+
+
 $(document).ready(function () {
 
 
-        // TODO: Loading screen for letters
+//images loaded
 
+    $('#container').imagesLoaded()
+  .always( function( instance ) {
+    console.log('all images loaded');
+  })
+  .done( function( instance ) {
+    console.log('all images successfully loaded');
+  })
+  .fail( function() {
+    console.log('all images loaded, at least one is broken');
+  })
+  .progress( function( instance, image ) {
+    var result = image.isLoaded ? 'loaded' : 'broken';
+    console.log( 'image is ' + result + ' for ' + image.img.src );
+  });
+
+
+
+
+    var currAutoTypePos = 0;
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var type = url.searchParams.get("q");
+    if (type) {
+        typeLetters(type);
+    } else {
+        typeLetters('great again!');
         
-    var charcount = 0;
-    $(document).keyup(function (e) {
-        console.log('pressed' + e.which);
-        if (keymap[e.which]) {
-            charcount++;
-            $('.block-word').last().append('<img class="block-letter" src="images/l/' + keymap[e.which] + '.jpg" />');
-        } else if (e.which == 13) { // enter
+    }
 
-        } else if (e.which == 16) { // shift
 
-        } else if (e.which == 32) { // space
-            $('<div class="block-word"></div>').insertBefore(".cursor");
+        // TODO: Loading screen for letters
+        var charcount = 0;
+    function typeLetters(str)
+    {
+        for (j=0;j<str.length;j++)
+        {
+            setTimeout(function (){
+                console.log(str.charAt(currAutoTypePos));
+                // take care of !?., and space
+                var currChar = keymap.indexOf(str.toLowerCase().charAt(currAutoTypePos));
+                if (str.charAt(currAutoTypePos) == " ")
+                {
+                    currChar = 32   
+                } else if (str.charAt(currAutoTypePos) == ".")
+                {
+                    currChar = keymap.indexOf('dot');  
 
-        } else if (e.which == 8) { // backspace
-            // if there is letters inside of the last word, remove last
+                } else if (str.charAt(currAutoTypePos) == ",")
+                {
+                    currChar = keymap.indexOf('comma');  
+
+                }else if (str.charAt(currAutoTypePos) == "!")
+                {
+                    currChar = keymap.indexOf('ex');  
+
+                }else if (str.charAt(currAutoTypePos) == "?")
+                {
+                    currChar = keymap.indexOf('ex');  
+
+                }
+
+                addLetter(currChar);
+                changeSize(charcount);
+                currAutoTypePos++  
+            }, (200+(Math.random()*40))*j);
+        }
+    }
+        function delPress() {
             if ($('.block-word').last().children().length > 0) {
                 $('.block-word img').last().remove();
                 charcount--;
@@ -65,6 +119,38 @@ $(document).ready(function () {
 
             }
 
+        }
+function addLetter(ascii)
+{
+    
+    charcount++;
+    if (ascii == 32)
+    {
+        $('<div class="block-word"></div>').insertBefore(".cursor");
+    } else {
+
+    $('.block-word').last().append('<img class="block-letter" src="images/l/' + keymap[ascii] + '.jpg" />');
+    }
+}
+        
+    
+    $(document).keyup(function (e) {
+        console.log('pressed' + e.which);
+        if (keymap[e.which]) {
+            addLetter(e.which);
+                } else if (e.which == 13) { // enter
+
+        } else if (e.which == 16) { // shift
+
+        } else if (e.which == 32) { // space
+            addLetter(e.which);
+
+           
+
+        } else if (e.which == 8) { // backspace
+            // if there is letters inside of the last word, remove last
+         
+            delPress();
 
 
 
