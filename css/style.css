@@ -177,6 +177,13 @@ background: #EED7D5;
 .wrapper {
     padding-top:24px;
 }
+
+.credits {
+    position: static;
+    margin-top:32px;
+}
+
+
 }
 
 /* cursor animation */
