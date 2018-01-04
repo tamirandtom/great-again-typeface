@@ -10,7 +10,6 @@ html {
 }
 body {
     font-family: 'Montserrat', sans-serif;
-
     background: #F5F5F5;
     color: #000;
     font-size: 14px;
@@ -18,14 +17,34 @@ body {
     min-height: 100%;
 }
 
+.fade {
+    z-index:100;
+    position: fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    background:#F5F5F5;
+    opacity:0;
+    transition:all 1s ease-in-out;
+    pointer-events:none;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
 
+.fade.vis {
+    opacity:1;
+
+}
 .credits {
     font-size:14px;
+    line-height:18px;
+    padding-bottom:16px;
     font-weight:400;
     text-align:center;
     color:#212121;
-    height:40px;
-    border-bottom: 8px solid #f00;
+    border-bottom: 8px solid #DC4E41;
     position:absolute;
     width:100%;
     bottom:0px;
@@ -38,9 +57,10 @@ body {
 }
 .credits a {
     font-weight: 500;
-    color:#f00;
+    color:#DC4E41;
     letter-spacing:0.5px;
     text-decoration:none;
+    transition: all 0.2s ease-in-out;
 }
 
 .credits a:hover {
@@ -50,7 +70,8 @@ body {
     margin: auto auto;
     padding: 0 16px;
     width: 100%;
-    max-width: 960px;
+    max-width: 850px;
+    padding-top:80px;
     /* direction:rtl; */
     text-align: center;
 }
@@ -61,14 +82,32 @@ body {
     justify-content: center;
 }
 .button {
-    background:#ddd;
-    font-size:30px;
+    font-size:14px;
     padding:5px 12px;
-    margin:4px;
+    color:#DC4E41;
+    letter-spacing:0.5px;
+    font-weight:500;
+    text-transform: uppercase;
+    margin:16px;
+    border-radius:4px;
+    cursor: pointer;
+    display:flex;
+    flex-flow: row;
+    align-items: center;
+    transition: all 0.2s ease-in-out;    
+}
+.button:hover {
+background: #EED7D5;
+}
+.button i {
+    margin-right:8px;
+    color:#DC4E41;
 }
 #frame {
     height: 500px;
-    max-width: 900px;
+    max-height:60vh;
+    /* max-width: 900px; */
+    overflow:hidden;
     background: #fff;
     display: flex;
     align-items: center;
@@ -81,7 +120,7 @@ body {
 }
 
 #frame.frameError {
-    border-color: #ccc;
+    border-color: #DC4E41;
 }
 
 .block-word {
@@ -116,6 +155,30 @@ body {
 .cursor.size6 {height: 50px;}
 
 
+@media (max-width: 600px) {
+    .block-letter.size1{ height: 80px; margin:12px 0;}
+    .block-letter.size2{ height: 60px; margin:10px 0;}
+    .block-letter.size3{ height: 50px; margin:10px 0;}
+    .block-letter.size4{ height: 40px;margin:5px 0; }
+    .block-letter.size5{ height: 40px;margin:5px 0; }
+    .block-letter.size6{ height: 40px;margin:5px 0; }
+
+
+.cursor.size1 {height: 80px;}
+.cursor.size2 {height: 50px;}
+.cursor.size3 {height: 50px;}
+.cursor.size4 {height: 50px;}
+.cursor.size5 {height: 50px;}
+.cursor.size6 {height: 50px;}
+
+.buttons-container {
+    flex-direction: column;
+}
+.wrapper {
+    padding-top:24px;
+}
+}
+
 /* cursor animation */
 
 .blinking-cursor {
@@ -127,28 +190,82 @@ body {
   }
   @-webkit-keyframes blink {
     0%   { background: #fff }
-    50%  { background: #FF3D12 }
-    97%  { background: #FF3D12 }
+    50%  { background: #DC4E41 }
+    97%  { background: #DC4E41 }
     100% { background: #fff }
   }
   
   @-moz-keyframes blink {
     0%   { background: #fff }
-    50%  { background: #FF3D12 }
-    97%  { background: #FF3D12 }
+    50%  { background: #DC4E41 }
+    97%  { background: #DC4E41 }
     100% { background: #fff }
   }
   
   @-ms-keyframes blink {
     0%   { background: #fff }
-    50%  { background: #FF3D12 }
-    97%  { background: #FF3D12 }
+    50%  { background: #DC4E41 }
+    97%  { background: #DC4E41 }
     100% { background: #fff }
   }
   
   @-o-keyframes blink {
     0%   { background: #fff }
-    50%  { background: #FF3D12 }
-    97%  { background: #FF3D12 }
+    50%  { background: #DC4E41 }
+    97%  { background: #DC4E41 }
     100% { background: #fff }
   }
+
+@-webkit-keyframes lds-ripple {
+  0% {
+    top: 90px;
+    left: 90px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 15px;
+    left: 15px;
+    width: 150px;
+    height: 150px;
+    opacity: 0;
+  }
+}
+@keyframes lds-ripple {
+  0% {
+    top: 90px;
+    left: 90px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 15px;
+    left: 15px;
+    width: 150px;
+    height: 150px;
+    opacity: 0;
+  }
+}
+.lds-ripple {
+  position: relative;
+}
+.lds-ripple div {
+  box-sizing: content-box;
+  position: absolute;
+  border-width: 10px;
+  border-style: solid;
+  opacity: 1;
+  border-radius: 50%;
+  -webkit-animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(1) {
+  border-color: #ffffff;
+}
+.lds-ripple div:nth-child(2) {
+  border-color: #ffffff;
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+}

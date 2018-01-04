@@ -37,9 +37,11 @@ $(document).ready(function () {
 
 //images loaded
 
-    $('#container').imagesLoaded()
+    $('.imagesloaded').imagesLoaded()
   .always( function( instance ) {
     console.log('all images loaded');
+
+    goType();
   })
   .done( function( instance ) {
     console.log('all images successfully loaded');
@@ -59,12 +61,21 @@ $(document).ready(function () {
     var url_string = window.location.href;
     var url = new URL(url_string);
     var type = url.searchParams.get("q");
-    if (type) {
-        typeLetters(type);
-    } else {
-        typeLetters('great again!');
-        
+
+   
+    function  goType() {
+
+        $('.fade').removeClass('vis');
+
+        if (type) {
+            typeLetters(type);
+        } else {
+            typeLetters('great again!');
+            
+        }
+
     }
+    
 
 
         // TODO: Loading screen for letters
