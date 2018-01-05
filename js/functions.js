@@ -1,5 +1,4 @@
 var keymap = [];
-
 keymap[97] = keymap[65] = 'a';
 keymap[98] = keymap[66] = 'b';
 keymap[99] = keymap[67] = 'c';
@@ -35,24 +34,15 @@ keymap[190] = 'dot';
 $(document).ready(function () {
 
 
-//images loaded
+
+    //images loaded
 
     $('.imagesloaded').imagesLoaded()
-  .always( function( instance ) {
-    console.log('all images loaded');
+        .always(function (instance) {
+            console.log('all images loaded');
 
-    goType();
-  })
-  .done( function( instance ) {
-    console.log('all images successfully loaded');
-  })
-  .fail( function() {
-    console.log('all images loaded, at least one is broken');
-  })
-  .progress( function( instance, image ) {
-    var result = image.isLoaded ? 'loaded' : 'broken';
-    console.log( 'image is ' + result + ' for ' + image.img.src );
-  });
+            goType();
+        });
 
 
 
@@ -61,9 +51,9 @@ $(document).ready(function () {
     var url_string = window.location.href;
     var url = new URL(url_string);
     var type = url.searchParams.get("q");
+    var cuttText = '';
 
-   
-    function  goType() {
+    function goType() {
 
         $('.fade').removeClass('vis');
 
@@ -71,134 +61,170 @@ $(document).ready(function () {
             typeLetters(type);
         } else {
             typeLetters('great again!');
-            
+
         }
 
     }
-    
 
 
-        // TODO: Loading screen for letters
-        var charcount = 0;
-    function typeLetters(str)
-    {
-        for (j=0;j<str.length;j++)
-        {
-            setTimeout(function (){
-                console.log(str.charAt(currAutoTypePos));
+
+    // TODO: Loading screen for letters
+    var charcount = 0;
+
+    function typeLetters(str) {
+        for (j = 0; j < str.length; j++) {
+            setTimeout(function () {
+                // console.log(str.charAt(currAutoTypePos));
                 // take care of !?., and space
-                var currChar = keymap.indexOf(str.toLowerCase().charAt(currAutoTypePos));
-                if (str.charAt(currAutoTypePos) == " ")
-                {
-                    currChar = 32   
-                } else if (str.charAt(currAutoTypePos) == ".")
-                {
-                    currChar = keymap.indexOf('dot');  
-
-                } else if (str.charAt(currAutoTypePos) == ",")
-                {
-                    currChar = keymap.indexOf('comma');  
-
-                }else if (str.charAt(currAutoTypePos) == "!")
-                {
-                    currChar = keymap.indexOf('ex');  
-
-                }else if (str.charAt(currAutoTypePos) == "?")
-                {
-                    currChar = keymap.indexOf('ex');  
-
-                }
-
-                addLetter(currChar);
-                changeSize(charcount);
-                currAutoTypePos++  
-            }, (200+(Math.random()*40))*j);
+                var currChar = str.toLowerCase().charAt(currAutoTypePos);
+                addChar(currChar);
+                currAutoTypePos++
+            }, (200 + (Math.random() * 40)) * j);
         }
     }
-        function delPress() {
-            if ($('.block-word').last().children().length > 0) {
-                $('.block-word img').last().remove();
+
+    function delPress() {
+        if ($('.block-word').last().children().length > 0) {
+            $('.block-word img').last().remove();
+            charcount--;
+            cuttText = cuttText.slice(0, -1);
+            
+
+        } else {
+            // if there is more than 1 space, remove last
+            if ($('.block-word').length > 1) {
+                $('.block-word').last().remove();
+                $('.block-space').last().remove();
+                cuttText = cuttText.slice(0, -1);
+                
                 charcount--;
             } else {
-                // if there is more than 1 space, remove last
-                if ($('.block-word').length > 1) {
-                    $('.block-word').last().remove();
-                    charcount--;
-                } else {
-                    flashError();
-                }
-
+                flashError();
             }
 
         }
-function addLetter(ascii)
-{
-    
-    charcount++;
-    if (ascii == 32)
-    {
-        $('<div class="block-word"></div>').insertBefore(".cursor");
-    } else {
+        changeShareText();
 
-    $('.block-word').last().append('<img class="block-letter" src="images/l/' + keymap[ascii] + '.jpg" />');
     }
-}
-        
-    
+
+    function addChar(str) {
+        var currChar;
+        if (str == " ") {
+            currChar = 32
+        } else if (str == ".") {
+            currChar = keymap.indexOf('dot');
+
+        } else if (str == ",") {
+            currChar = keymap.indexOf('comma');
+
+        } else if (str == "!") {
+            currChar = keymap.indexOf('ex');
+
+        } else if (str == "?") {
+            currChar = keymap.indexOf('ex');
+        } else if (keymap.indexOf(str)) {
+            currChar = keymap.indexOf(str);
+
+        }
+
+        addLetter(currChar);
+        changeSize(charcount);
+
+    }
+
+    function getCharFromAscii(num) {
+        var currChar;
+        if (num == 32) {
+            currChar = ' ';
+        } else if (num == keymap.indexOf('dot')) {
+            currChar = '.';
+
+        } else if (num == keymap.indexOf('comma')) {
+            currChar = ',';
+
+        } else if (num == keymap.indexOf('ex')) {
+            currChar = '!';
+
+        } else if (keymap[num]) {
+            currChar = keymap[num];
+
+        } else {
+            currChar = "";
+        }
+        return currChar;
+    }
+
+
+    function addLetter(ascii) {
+        charcount++;
+        if (ascii == 32) {
+            $('<div class="block-space"></div><div class="block-word"></div>').insertBefore(".cursor");
+        } else {
+            $('.block-word').last().append('<img class="block-letter" src="images/l/' + keymap[ascii] + '.jpg" />');
+        }
+        cuttText = cuttText + getCharFromAscii(ascii);
+        changeShareText();
+    }
+
+    function changeShareText() {
+        $('#fb').attr('href','https://www.facebook.com/sharer/sharer.php?u=greatagaintype.com/?q='+encodeURI(cuttText)); 
+    }
+
     $(document).keyup(function (e) {
-        console.log('pressed' + e.which);
+        // console.log('pressed' + e.which);
         if (keymap[e.which]) {
             addLetter(e.which);
-                } else if (e.which == 13) { // enter
+        } else if (e.which == 13) { // enter
 
         } else if (e.which == 16) { // shift
 
         } else if (e.which == 32) { // space
             addLetter(e.which);
 
-           
+
 
         } else if (e.which == 8) { // backspace
             // if there is letters inside of the last word, remove last
-         
+
             delPress();
 
 
 
 
         } else {
-            flashError();            
+            flashError();
         }
         // console.log('count : ' + charcount);
         changeSize(charcount);
+        console.log(cuttText);
     });
 
     function changeSize(num) {
         $('.block-letter').attr('class', 'block-letter size1');
         $('.cursor').attr('class', 'cursor blinking-cursor size1');
+        $('.block-space').attr('class', 'block-space');
         if (num < 6) {
-            $('.block-letter').addClass('size1');
-            $('.cursor').addClass('size1');
+
+            $('.block-letter, .cursor, .block-space').addClass('size1');
+
         } else if (num < 18) {
-            $('.block-letter').addClass('size2');
-            $('.cursor').addClass('size2');
-            
+            $('.block-letter, .cursor, .block-space').addClass('size2');
+
+
         } else if (num < 24) {
-            $('.block-letter').addClass('size3');
-            $('.cursor').addClass('size3');
-            
+            $('.block-letter, .cursor, .block-space').addClass('size3');
+
         } else if (num < 32) {
-            $('.block-letter').addClass('size4');
-            $('.cursor').addClass('size4');
-            
+            $('.block-letter, .cursor, .block-space').addClass('size4');
+
+
         } else if (num < 50) {
-            $('.block-letter').addClass('size5');
-            $('.cursor').addClass('size5');
-            
+            $('.block-letter, .cursor, .block-space').addClass('size5');
+
         } else {
-            $('.block-letter').addClass('size6');
-            $('.cursor').addClass('size6');
-            
+            $('.block-letter, .cursor, .block-space').addClass('size6');
+
+
         }
     }
 
@@ -215,7 +241,7 @@ function addLetter(ascii)
             // document.body.appendChild(canvas);
             canvas.toBlob(function (blob) {
                 saveAs(blob, "Screenshot.png");
-                
+
             });
         });
     });
@@ -223,13 +249,13 @@ function addLetter(ascii)
     $("#fbshare").click(function () {
 
         // TODO
-    //     html2canvas(document.querySelector("#frame")).then(canvas => {
-    //         // document.body.appendChild(canvas);
-    //         var data = canvas.toDataURL("image/png");
-    //         var encodedPng = data.substring(data.indexOf(',') + 1, data.length);
-    //         var decodedPng = Base64Binary.decode(encodedPng);
-    //    window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;
-            
+        //     html2canvas(document.querySelector("#frame")).then(canvas => {
+        //         // document.body.appendChild(canvas);
+        //         var data = canvas.toDataURL("image/png");
+        //         var encodedPng = data.substring(data.indexOf(',') + 1, data.length);
+        //         var decodedPng = Base64Binary.decode(encodedPng);
+        //    window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;
+
         // });
     });
 

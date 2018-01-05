@@ -99,6 +99,7 @@ body {
     flex-flow: row;
     align-items: center;
     transition: all 0.2s ease-in-out;
+    text-decoration: none;
 }
 
 .button:hover {
@@ -131,8 +132,30 @@ body {
 }
 
 .block-word {
-    margin-left: 40px;
     white-space: pre-line;
+}
+
+.block-space {
+    display: inline-block;
+}
+
+.block-space.size1 {
+    width:40px;
+}
+.block-space.size2 {
+    width:30px;
+}
+.block-space.size3 {
+    width:20px;
+}
+.block-space.size4 {
+    width:20px;
+}
+.block-space.size5 {
+    width:20px;
+}
+.block-space.size6 {
+    width:10px;
 }
 
 .block-letter.size1 {
